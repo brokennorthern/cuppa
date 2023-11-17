@@ -11,15 +11,18 @@ int cur = 0;
 
 foreach (string line in lines)
 {
-    if(line != "")
+    if (line != "")
     {
         int x = int.Parse(line);
         cur += x;
     }
-
-    if (line == "" && cur > max)
+    else
     {
-        max = cur;
+        if (cur > max)
+        {
+            max = cur;
+
+        }
         cur = 0;
     }
 }
