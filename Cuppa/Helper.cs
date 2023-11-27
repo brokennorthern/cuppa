@@ -9,9 +9,11 @@ using System.Xml;
 
 namespace Cuppa
 {
-    public class Helper
+    public class Helper : Networking
     {
-        
+        static readonly HttpClient httpClient = new HttpClient();
+        const string BaseURL = "https://adventofcode.com/2022/day";
+        static readonly string session = File.ReadAllText($"{nameof(session)}.txt");
         public int Day { get; private set; }
         public string Input { get; private set; }
         public Helper(int day)
@@ -19,15 +21,6 @@ namespace Cuppa
             Day = day;
             Input = GetInput(Day);
         }
-        string GetInput (int day)
-        {
-            string cacheFile = $"cached_day_{day}.txt";
-            var wc = new WebClient();
-            wc.Headers.Add(HttpRequestHeader.Cookie, $"{nameof(session)}={session}");
-            string contents = wc.DownloadString($"{BaseURL}/{day}/input");
-            System.IO.File.WriteAllText( cacheFile, contents );
-            return contents;
-
-        }
+        
     }
 }
